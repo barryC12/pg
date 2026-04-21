@@ -1,39 +1,59 @@
 # pg
 
-> A simple, universal package manager wrapper for Linux.
+A simple, universal package manager wrapper for Linux.
 
-pg provides one consistent interface across multiple distributions while automatically using the correct backend package manager.
+pg provides a single consistent interface across Linux distributions while automatically using the correct system package manager.
 
----
-
-## Features
-
-- Unified commands across package managers
-- Automatic detection (runs once and caches config)
+Features:
+- Unified commands across all major package managers
+- Automatic detection on first run (saved to config)
 - Optional helpers (nala for apt, paru for Arch)
-- Persistent configuration (`~/.config/pg/config.pg`)
+- Fast and lightweight
 - Reconfigurable anytime
-- Lightweight and fast
 
----
+Supported distributions:
+- Debian / Ubuntu → apt / nala
+- Arch Linux → pacman / paru
+- Fedora → dnf
+- openSUSE → zypper
+- Gentoo → emerge
+- Void Linux → xbps
 
-## Supported Systems
+Installation:
 
-| System            | Backend Used |
-|------------------|-------------|
-| Debian / Ubuntu  | `nala` / `apt` |
-| Arch Linux       | `pacman` / `paru` |
-| Fedora           | `dnf` |
-| openSUSE         | `zypper` |
-| Gentoo           | `emerge` |
-| Void Linux       | `xbps` |
+Manual install (recommended):
 
----
+sudo apt install make git   # or equivalent for your distro
 
-## Installation
+Clone and install:
 
-```bash
-git clone https://codeberg.org/barryC12/pg.git
+cd ~
+git clone https://github.com/barryC12/pg.git
 cd pg
-chmod +x pg
-sudo mv pg /usr/local/bin/
+sudo make install
+
+Quick install:
+
+Make sure curl is installed:
+
+curl -fsSL https://raw.githubusercontent.com/barryC12/pg/refs/heads/master/quick-install/inst.pg | sh
+
+Usage:
+
+pg -S firefox        install package
+pg -Rm firefox       remove package
+pg -Cl firefox       purge package
+pg -I firefox        search packages
+pg -Up               update package lists
+pg -Ut               upgrade system
+pg -Rec              reconfigure package manager
+pg -H                show help
+
+Configuration:
+~/.config/pg/config.pg
+
+Notes:
+- paru must be installed manually on Arch Linux
+- pg is a wrapper, not a replacement for system package managers
+- Gentoo uses emerge and emerge -C
+- Void Linux uses xbps
